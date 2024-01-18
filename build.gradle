@@ -16,8 +16,23 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+    // MVC로 웹사이트를 개발할 수 있도록 하는 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-web'  
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	// thymeleaf 라이브러리 
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	
+	// lombok 
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	
+	// developmentOnly  : 개발시에만 적용 , 배포 할 때는 배포되지 않음. (*.jar ) 
+	// devtool
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+
 }
 
 tasks.named('test') {

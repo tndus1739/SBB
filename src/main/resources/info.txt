@@ -1,0 +1,49 @@
+
+	src/main/resources
+		templates : View 페이지가 위치해야될 폴더 , thymeleaf -> spring boot 에서 지원
+		static    : 외부 css , 외부 js , 그림이미지 파일 
+		application.properties : spring boot 의 각종 설정, DB 설정 , JPA , View 설정 , 톰켓 포토 설정
+		
+	src/main/java :	백엔드에 자바코드를 넣음
+	src/test/java :	test 코드를 넣음
+		
+	build.gradle  : 라이브러리 적용 파일 ( 그레들 )
+	
+	@ ( 어노테이션 ) : 프레임워크의 기술을 자동으로 처리
+		
+	- @Controller : client 의 요청을 받는 클래스라고 정의 ( 클래스는 빈껍데기인데 객체화를 시켜주는 역할이 바로 @Controller)
+		- class 블락 할당 , 스프링 프레임워크에 빈 (객체화) 등록 ( RAM 등록 )
+	
+	- @GetMapping("/hello") : client 의 get 요청을 처리하는 어노테이션
+		- 메소드 위에 할당
+		(http://localhost:8585) 까지는 생략을 하고 /hello 호출
+		- url 로 넘기는 것은 전부 "get" 방식
+		- form method="get"
+		- a href = ""  ( 링크로 넘어가는 요청은 전부 "get요청"
+    
+    - @PostMapping ("login.do")
+    	- form method="post" action = "login.do"
+    	- form 형식으로 넘기는 요청은 "post 요청"
+    
+    - @ResponseBody 
+    	- 메소드 위에 할당 , JSON 포멧으로 전송, 문자열 자체를 전송 (문자열 자체를 return으로 돌려줌)
+    	
+    	
+   ★ Spring에서 라이브러리 관리 (JDK 와 Spring 버전에 관련된 호환성 문제를 자동으로 관리해줌)
+   	- 메이븐 : xml 형식으로 관리
+	   	http://mvnrepository.com/ 
+	   	
+	- 그래들 : 그루비 문법으로 쉽게 관리  (메이븐에서 진화됨)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
