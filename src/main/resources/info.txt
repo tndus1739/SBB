@@ -32,18 +32,80 @@
    ★ Spring에서 라이브러리 관리 (JDK 와 Spring 버전에 관련된 호환성 문제를 자동으로 관리해줌)
    	- 메이븐 : xml 형식으로 관리
 	   	http://mvnrepository.com/ 
+	   	pom.xml : 파일에서 라이브러리 관리
 	   	
 	- 그래들 : 그루비 문법으로 쉽게 관리  (메이븐에서 진화됨)
+		build.gradle : 파일에서 관리
+		
+	STS4에서 Java EE로 확장 : html , jsp
+		- 엔코딩 타입 : UTF-8 적용
+		
+	lombok 작동
+
+	JPA : 인터페이스 , SQL쿼리 없이도 자바의 객체로 DB의 테이블을 생성 , 
+		  SQL 쿼리 없이 자바의 객체의 메소드로 CRUD
+		  유지 보수를 아주 쉽게 할 수 있다.
+		  JPA를 구현한 구현체 하이버네이트
+		  
+		- ORM : 자바의 클래스나 메소드로 DB를 접슨할 수 있도록 하는 기술 	
+		        유지 보수를 쉽게함
+		        마이바티스(금융권 , SI) , JPA (솔루션)
 	
+	---------------------------------------------------------------------------------------
 	
+	build.gradle : 라이브러리 등록 
+	1. JPA
+	2. JDBC
 	
+	3. H2 DB
+	4. Oracle DB
+	5. MySQL db
 	
+	----------------------------------------------------------------------------------------
 	
+	application.properties --> 설정은 여기에서 함
 	
+	----------------------------------------------------------------------------------------
+	JPA 라이브러리가 등록되었을 경우
 	
+	★★★★★
+	@Entity : class 위에 할당 
+	   - DB의 테이블을 매핑하는 클래스
+	     - Question : 테이블명
+	     - 필드 : 테이블의 컬럼과 연결
 	
+	     - @Id : 필드 위에 할당 , Primary Key ( 중복된 값을 못 넣도록 설정) , 테이블에 반드시 1개가 적용되어야 함
+	     - @GeneratedValue  : 자동으로 값을 증가해서 생성해줌 , @Id와 같이 부여
+	     - @Column : 컬럼의 제약 사항을 적용
+	     
+	     - 질문 (Question)  : 1 이라면, 질문에 대한 답변 (Answer) : 多 ( 1:多 관계 )
+	     - 하나의 질문에 대해서 모든 답변을 가져올 수 있다
+  		 cascade=CascadeType.REMOVE : 질문이 제거될 때 질문에 해당하는 모든 답변을 함께 제거함
+		 @OneToMany(mappedBy = "question" , cascade=CascadeType.REMOVE) 
 	
+		 Foreign Key : Answer 테이블은 Question 테이블을 참조함
+		 @ManyToOne : JPA에서 테이즐 간의 관계 설정 , 자식테이블(Answer)에서 부모테이블(Question)을 참조
+		 question 컬럼은 Question 테이블의 Primary Key의 값이 들어옴
+		 question 컬럼 이름이 question_id로 이름이 바뀜
+		 @ManyToOne
 	
+	========================================================================================
+	
+	ORM : MyBatis , JPA , SQL쿼리문을 쓰지 않고 메소드를 사용해서 CRUD 
+	Repository : DAO를 Repository 라고 호칭한다. DB의 CRUD하는 메소드가 적용되어있는 인터페이스
+	
+	public interface QuestionRepository extends JpaRepository<Question, Integer>{   //★★★★★ 중요함
+	
+	- 인터페이스 이름 짓는 방법 : Entity 클래스의 이름 + Repository
+	- 상위 인터페이스의 모든 메소드가 상속 되어서 내려옴
+	
+	JpaRepository 에서 선언된 메소드가 상속되어 내려옴
+	
+	findAll() : select * from question
+	save()    : insert, update
+	delete()  : delete
+	
+	JUnit Test : 로직을 모두 생성하기 전에 DB에 값이 잘 CRUD 되는지 테스트함
 	
 	
 	

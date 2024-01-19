@@ -24,15 +24,27 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 	
-	// lombok 
+	// lombok : 롬북 설치 명령어 : java -jar lombok.jar
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	
 	// developmentOnly  : 개발시에만 적용 , 배포 할 때는 배포되지 않음. (*.jar ) 
 	// devtool
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
-
+	
+	// JPA 라이브러리 : H2 DB , Oracle , MySQL..
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	
+	// DB에 연결하는 라이브러리 : H2 DB (테스트,개발할 때 쓰는 DB , 배포할 때는 사용X [설치필요X] , Oracle , MySQL
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
+	
+	// JUnit Test 라이브러리
+	testImplementation 'org.junit.jupiter:junit-jupiter' 
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	
 }
 
 tasks.named('test') {
