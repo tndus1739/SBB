@@ -37,7 +37,7 @@ public class Answer {
 	 
 	 //★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	 @ManyToOne  // Answer 테이블 : many / Question 테이블 : one
-	 private Question question;
 	 
+	 private Question question;  // 중요★★★★★	 
 	
 }

@@ -13,6 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class SbbApplicationTests {
+	
+	// Question  테이블의 CRUD
+	
 
 	// 객체를 DI ( 주입 ) : 객체를 Spring Framework에 등록
 	// 객체 생성 (java) : A a = new A();
@@ -173,7 +176,7 @@ class SbbApplicationTests {
 		//@Test
 		void jpaUPdate () {
 			
-		// 1. 기존의 레코드를 가지고 와서 setter 로 수정 후 save ()
+		// 1. update : 기존의 레코드를 가지고 와서 setter 로 수정 후 save ()
 		   
 		Optional<Question> op = questionRepository.findById(1);   // 레코드가 1개이기 때문에 List가 아니라 Optional
 		
@@ -197,8 +200,10 @@ class SbbApplicationTests {
 		
 		// 데이터 입력 : save() : insert , update ( 언제 insert가 되고 언제 update가 되는지 )
 		
-		@Test
+		//@Test
 		void jpaInsert2 () {
+		
+		// 2. insert :객체를 만들어서 setter로 값을 다 주입
 			
 			Question q = new Question () ;
 			
@@ -209,6 +214,25 @@ class SbbApplicationTests {
 			questionRepository.save(q);  // insert
 		}
 		
+		// 데이터 삭제 : delete ()
+		
+		@Test
+		void jpaDelete () {
+			// delete 할 레코드(Question)를 가져와서 , delete(Question)
+			// ID = 52
+			
+			Optional <Question> op =questionRepository.findById(52);
+			
+			if (op.isPresent()) {
+				
+				Question q = op.get();
+				
+				questionRepository.delete(q);  // id=52 레코드 삭제
+				
+				
+			}
+			
+		}
 		
 		
 }
