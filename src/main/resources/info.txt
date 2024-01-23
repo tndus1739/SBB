@@ -109,6 +109,47 @@
 	
 	=============================================================================================
 	
+	★ 전체적인 로직
+	
+	client ---> Controller ---> DTO에 저장 ---> Service가 로직을 처리 (DTO : Entity) ---> Repository 
+	       요청
+	
+	★ Service 클래스를 중간에 두게 되면 장점
+	  
+	1. 반복되는 코드를 방지할 수 있다.
+	2. 보안을 향상할 수 있다. (Controller에서 Entity 클래스, Repository를 직접 접근하지 않는다.)
+	3. DTO(client) --> Entity(DB)  //  Entity(DB) --> DTO(client)
+	
+	-- th: html 코드가 아니고 thymeleaf 문법 
+			
+	[2가지 방법]		 
+			
+	
+	<tr th:each = "question : ${questionList}" >
+		<td>
+		<a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+		</td>
+		<td th:text = "${question.createDate}"></td>
+		</tr>
+			
+			
+	<tr th:each = "question : ${questionList}" >
+		<td> [[${question.subject}]]"</td>
+		<td> [[${question.createDate}]]"</td>
+	</tr>
+			 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

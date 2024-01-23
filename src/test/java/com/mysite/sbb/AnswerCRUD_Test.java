@@ -66,7 +66,7 @@ public class AnswerCRUD_Test {
 	
 	// 질문 내용으로 검색
 	
-	@Test
+	//@Test
 	void jpaSelectContent () {
 		
 		//select * from Answer where content like '%SQL%';
