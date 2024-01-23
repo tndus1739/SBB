@@ -10,6 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.mysite.sbb.answer.Answer;
+import com.mysite.sbb.question.Question;
+import com.mysite.sbb.question.QuestionRepository;
+
 import jakarta.transaction.Transactional;
 
 @SpringBootTest
@@ -107,12 +111,13 @@ public class QuestionCRUD_Test {
 	
 	
 	// 해당 질문에 대한 모든 답변을 가지고 오기  
-	
-	@Transactional
-	@Test
+	// @Transactional : Test코드에서 세션이 끊기지 않도록 설정
+	// 메소드 블락의 쿼리를 하나의 트랜젝션으로 작동
+	@Transactional 
+	//@Test
 	void jpaQuestionAnswerList () {
 		
-		Optional<Question> op = questionRepository.findById(1);
+		Optional<Question> op = questionRepository.findById(2);
 		
 		Question q = null ; 
 		
@@ -128,6 +133,6 @@ public class QuestionCRUD_Test {
 			System.out.println(answerlist.get(i).getContent());
 		}
 		
-		assertEquals(4, answerlist.size());
+		assertEquals(12, answerlist.size());
 	}
 }
