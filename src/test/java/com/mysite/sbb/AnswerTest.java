@@ -97,7 +97,7 @@ public class AnswerTest {
 			
 			answerRepository.save(a1);
 			
-			// 두번째 답변
+			// 두번째 답변 
 			Answer a2 = new Answer ();
 			a2.setContent("유지보수를 쉽게 합니다.");
 			a2.setCreateDate(LocalDateTime.now());
