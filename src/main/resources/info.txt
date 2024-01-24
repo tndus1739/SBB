@@ -138,18 +138,31 @@
 		<td> [[${question.createDate}]]"</td>
 	</tr>
 			 
+	=============================================================================================
+	
+	- src/main/resource/templates : 뷰페이지가 위치 (Thymeleaf) , *.html
+    - src/main/resource/static : 외부 css, 외부 javascript , image파일
+	
+	=============================================================================================
+	
+	Thymeleaf의 layout : JSP Include와 동일한 처리를 담당
+		
+		- 중복된 코드를 방지할 수 있다.
+		- 유지보수를 쉽게 할 수 있다.
+		- 라이브러리가 등록이 되어있어야 한다.
+		
+		- thymeleaf 라이브러리 
+		implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+		implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'	
 	
 	
+	★ 유효성 체크 : 폼에 값을 체크해서 DB에 저장
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		- Javascript : FrontEnd 체크
+		- validate 라이브러리를 사용해서 서버에서 유효성 체크 	
+		
+	th:field="*{subject}" ---> name ="subject" id ="subject" value ="subject" (이 3개를 축약한 것)
+	th:field="*{content}" ---> name ="content" id ="content" value ="content" (이 3개를 축약한 것)
 	
 	
 	

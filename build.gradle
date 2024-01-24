@@ -44,6 +44,9 @@ dependencies {
 	// JUnit Test 라이브러리
 	testImplementation 'org.junit.jupiter:junit-jupiter' 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    
+	// 유효성 체크 라이브러리 : 폼에서 넣는 값을 체크해서 넘김
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	
 }
 
