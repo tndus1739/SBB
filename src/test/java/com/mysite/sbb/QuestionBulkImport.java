@@ -15,7 +15,7 @@ public class QuestionBulkImport {
 	@Autowired
 	private QuestionRepository questionRepository;
 	
-	@Test
+	//@Test
 	void bulkInsert() {
 		Question q = null ;
 		

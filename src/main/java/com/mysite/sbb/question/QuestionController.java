@@ -52,6 +52,15 @@ public class QuestionController {
 		// 페이징 처리된 객체를 받음
 		Page<Question> paging = questionService.getList(page);
 		
+		// paging에 등록되어 있는 중요 메소드 출력
+		System.out.println("전체 레코드 수 :" + paging.getTotalElements());
+		System.out.println("페이지당 출력 레코드 개수 : " + paging.getSize());
+		System.out.println("전체 페이지 개수 :" + paging.getTotalPages());
+		
+		System.out.println("현재 요청 페이지 번호 :" + paging.getNumber());
+		System.out.println("이전 페이지 존재 여부 :" + paging.hasPrevious());
+		System.out.println("다음 페이지 존재여부 : " + paging.hasNext());
+		
 		
 		// model에 담아서 client view 페이지로 전송
 		//model.addAttribute("questionList",questionList);

@@ -48,6 +48,11 @@ dependencies {
 	// 유효성 체크 라이브러리 : 폼에서 넣는 값을 체크해서 넘김
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	
+	// Spring Security 라이브러리 설치
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	
+	
 }
 
 tasks.named('test') {

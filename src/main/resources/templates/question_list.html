@@ -10,10 +10,27 @@
 				<!-- th: html 코드가 아니고 thymeleaf 문법 -->
 				 
 				<tr th:each = "question, loop : ${paging}" > <!-- question객체에 id값을 집어넣음 -->
-					<td th:text="${loop.count}"> </td> <!-- loop 객체가 1씩 증가 (게시글 넘버링)-->
+					
+				<!-- 주석 : paging에서 끄집어 내는 개수 -->	
+				<!--<td th:text="${loop.count}"> </td> --> <!-- loop 객체가 1씩 증가 (게시글 넘버링)-->
+				
+				<td th:text ="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>	
+					
 					<td>
 						<a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+					
+					
+					<!--질문에 대한 답변 개수 출력 (답변 개수가 0 보다 클 때 출력)-->
+					<span class="text-danger small ms-2"
+						th:if ="${#lists.size(question.answerList) > 0}"  
+						th:text ="${#lists.size (question.answerList)}"
+					>
+					
+					
+					</span>
+					
 					</td>
+					
 					<td th:text = "${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td> 
 					<!-- #temporals.format : ()안의 내용을 형식을 바꿔서 출력해라 -->
 				</tr>
@@ -21,6 +38,32 @@
 		</tbody>
 	
 	</table>
+	
+	<!-- 페이징처리 시작 -->
+    <div th:if="${!paging.isEmpty()}">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                <a class="page-link"
+                    th:href="@{|?page=${paging.number-1}|}"> <!-- paging.number : 현재 페이지 -->
+                    <span>이전</span>
+                </a>
+            </li>
+            
+            <!--  조건을 적용해서 현재 페이지(paging)에서 이전 5개 이후 5개 -->
+            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+            	th:if = "${page>= paging.number-5 and page <= paging.number+5}"
+                th:classappend="${page == paging.number} ? 'active'" 
+                class="page-item">
+                <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+            </li>
+            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                    <span>다음</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- 페이징처리 끝 -->
 	
 	<a th:href ="@{/question/create}" class= "btn btn-primary"> 질문등록 하기</a>
 	

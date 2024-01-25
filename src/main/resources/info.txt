@@ -164,5 +164,20 @@
 	th:field="*{subject}" ---> name ="subject" id ="subject" value ="subject" (이 3개를 축약한 것)
 	th:field="*{content}" ---> name ="content" id ="content" value ="content" (이 3개를 축약한 것)
 	
+	=============================================================================================
 	
+	★ Spring Security 라이브러리 설치
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+    
+    라이브러리를 설치하고 톰캣을 리부팅해야 작동이 된다.
+    
+    로그인 후 세션 유지기간 : 30분 (1800초)
+    - 사용자명 : user
+    - 비밀번호 ( 인증없이는 사이트가 접속불가) -> 리부팅할 때 마다 암호가 달라진다.
+    Using generated security password: a0fc03de-b2d1-400f-b4da-b59a961db285
+    
+    - 모든 페이지는 인증을 통해서 접근
+    - H2 Console 접근이 차단됨
+    Spring Security 설정 파일에서 모듈 설정
 	
