@@ -86,9 +86,11 @@ public class UserController {
 		}
 		
 		// ★ 인증 처리는  Spring Security 에서 처리함
-		// 인등을 처리하는 @PostMapping ("")
+		//인증을 처리하는 @PostMappging("/user/login") <== 
+		// SecurityConfig.java 에서 인증 정보를 받아서 처리함.
+				
 		
 		
-		
+		 
 		
 }

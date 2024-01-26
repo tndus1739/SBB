@@ -2,6 +2,8 @@ package com.mysite.sbb;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.AuthorizeHttpRequestsDsl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -54,11 +56,21 @@ public class SecurityConfig {
 				//.passwordParameter("password")  .passwordParameter의 파라미터가 "password"이면 생략가능
 				
 				// 로그인 실패시 이동할 페이지 
-				.failureUrl("/user/error")
+				//.failureUrl("/user/error")
 				// 로그인 성공시 이동할 페이지 
 				.defaultSuccessUrl("/")
 				)
 		
+		// 로그아웃 처리
+		.logout((logout) -> logout
+				// /user/logout
+				.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+				// 세션을 제거 후 이동할 페이지
+				.logoutSuccessUrl("/")
+				// 사용자의 세션을 모두 제거
+				.invalidateHttpSession(true)
+				
+				)
 		
 		
 		; // http의 마지막 부분
@@ -75,6 +87,18 @@ public class SecurityConfig {
 			}
 		
 	
-	
-	
+		// 인증을 처리하는 Bean (객체)
+		@Bean
+		AuthenticationManager authenticationManager (
+				
+				AuthenticationConfiguration authenticationConfiguration
+				
+				)  throws Exception {
+				
+			return authenticationConfiguration.getAuthenticationManager() ;
+		}
+
+
+
 }
+

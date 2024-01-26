@@ -1,5 +1,8 @@
 package com.mysite.sbb.user;
 
+import lombok.Getter;
+
+@Getter
 public enum UserRole {
 	
 	// 선언된 이외의 값은 넣지 못하도록 설정 , 권한 (USER , ADMIN) , 상품 카테고리 , 요일
@@ -15,3 +18,7 @@ public enum UserRole {
 	private String value ;
 			
 	}
+
+
+
+
