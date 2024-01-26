@@ -42,7 +42,26 @@ public class SecurityConfig {
 				.addHeaderWriter(new XFrameOptionsHeaderWriter(
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
 				)
-		;
+		
+		// 인증 처리 시작 --> Controller에서 처리하지 않고 Security 에서 처리함
+		.formLogin( (formLogin) -> formLogin
+				// 로그인 : Post 방식으로 client가 요청하는 주소
+				// @PostMapping(''/user/login")
+				.loginPage("/user/login")
+				
+				// Client 뷰페이지의 name = "username" , name = "password"이면 생략가능
+				//.usernameParameter("username")  .usernameParameter의 파라미터가 "username"이면 생략가능
+				//.passwordParameter("password")  .passwordParameter의 파라미터가 "password"이면 생략가능
+				
+				// 로그인 실패시 이동할 페이지 
+				.failureUrl("/user/error")
+				// 로그인 성공시 이동할 페이지 
+				.defaultSuccessUrl("/")
+				)
+		
+		
+		
+		; // http의 마지막 부분
 		
 		return http.build();
 	}
