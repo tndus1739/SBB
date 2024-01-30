@@ -30,21 +30,18 @@
 	           	</a> 
 	           	
 	           	<!-- 링크는 get 방식 -->
-	           	<a th:href="@{|/question/delete/${question.id}|}"
+	           	<a 
+	           		href="javascript:void(0)"
+	           		th:data-uri="@{|/question/delete/${question.id}|}"
 		           	sec:authorize = "isAuthenticated"
 	            	th:if ="${question.author != null and 
 	            	#authentication.getPrincipal().getUsername() == question.author.username}"  
 		           	th:text ="삭제"
-		           	class="btn btn-sm btn-outline-secondary"
+		           	class="delete btn btn-sm btn-outline-secondary"
 		           	>
 	           	
 	           	</a>
-	           	
-	           	
-	           	
-	           	
-	           	
-	           	                
+	           	      
             </div>
             
             
@@ -63,13 +60,31 @@
                 <div class="mb-2"> <!-- 글쓴 사용자 정보 출력 부분  -->
                 		<span th:if ="${answer.author != null}" th:text="${answer.author.username}"> </span>
                 	</div>
-                
-                
-                
-                
                     <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
             </div>
+            <!--  수정 / 삭제 버튼 추가 -->
+            <div class="my-3">
+            	<a 
+            	th:href = "@{|/answer/modify/${answer.id}|}"
+            	th:text="수정" 
+            	class="btn btn-sm btn-outline-secondary"
+            	sec:authorize = "isAuthenticated"
+            		th:if ="${answer.author != null and 
+            		#authentication.getPrincipal().getUsername() == answer.author.username}" 
+            	
+            	></a>
+            	
+            	
+            	<a th:text="삭제"
+            	class="btn btn-sm btn-outline-secondary"
+            	sec:authorize = "isAuthenticated"
+            		th:if ="${answer.author != null and 
+            		#authentication.getPrincipal().getUsername() == answer.author.username}" 
+            	></a>
+            
+            </div>
+            
         </div>
     </div>
     <!-- 답변 반복 끝  -->
@@ -87,5 +102,19 @@
         <input type="submit" value="답변등록" class="btn btn-primary my-2">
     </form>
 </div>
+
+<script layout:fragment="script" type='text/javascript'>
+const delete_elements = document.getElementsByClassName("delete");    // element : 하나의 객체 [삭제 버튼쪽 위의 코드 class="delete btn btn-sm btn-outline-secondary 에서 delete를 게더링
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;    // uri : 지금 요청하는 주소
+        };
+    });
+});
+</script>
+
+
+
 
 </html>

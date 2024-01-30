@@ -31,6 +31,7 @@ public class Answer {
 	 private String content;
 	 
 	 private LocalDateTime createDate;  // 실제 컬럼이름 : create_date
+	 private LocalDateTime modifyDate;  // 답변수정날짜
 	 
 	 // Foreign Key : Answer 테이블은 Question 테이블을 참조함
 	 // @ManyToOne : JPA에서 테이즐 간의 관계 설정 , 자식테이블(Answer)에서 부모테이블(Question)을 참조

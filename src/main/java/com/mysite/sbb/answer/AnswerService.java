@@ -50,4 +50,23 @@ public class AnswerService {
 	
 	}
 	
+	
+		// 답변을 수정하는 메소드 : Answer <-- 수정할 Answer 객체가 주입되어야 함  <-- Controller
+		
+		public void modify(Answer answer, String content) {    // 항상 update는 기존의 정보를 끄집어내서 setter로 수정한 뒤에 다시 정보를 보내줘야한다. 
+			answer.setContent(content);
+			answer.setModifyDate(LocalDateTime.now());
+			
+			// update
+			answerRepository.save(answer);
+			
+			
+		}
+	
+	
+	
+	
+	
+	
+	
 }

@@ -216,8 +216,9 @@ public class QuestionController {
 	// 현재 로그온한 계정과 DB의 저장된 username과 같을 때만 delete ( 같지 않을 때 예외 발생)
 	if (! principal.getName().equals(q.getAuthor().getUsername())) {
 		
-		// 예외를 강제로 발생시킴 ( 지금 넘어오는 유저정보와 DB안에 저장되어 있는 유저정보가 같아야 함)
-		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제할 권한이 없습니다.");
+		// 예외를 강제로 발생시킴 -- questionService.questionDelete(q); [이 블럭으로 못 넘어가게 하려고 ]
+		//( 지금 넘어오는 유저정보와 DB안에 저장되어 있는 유저정보가 같아야 함)
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제할 권한이 없습니다. ");
 	}
 	
 	
