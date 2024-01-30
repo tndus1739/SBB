@@ -3,7 +3,7 @@
 <div layout:fragment ="content" class="container my-3">
 		<table class="table">
 		<thead class="table-dark"> 
-			<tr> <th> 번호</th> <th> 제목 </th><th> 작성일시 </th>
+			<tr> <th> 번호</th> <th> 제목 </th><th> 글쓴이 </th> <th> 작성일시 </th>
 			</tr> 
 		</thead>
 			<tbody>
@@ -30,6 +30,11 @@
 					</span>
 					
 					</td>
+					
+					<td>
+					<span th:if="${question.author != null}" th:text="${question.author.username}"> </span>
+					</td>
+					
 					
 					<td th:text = "${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td> 
 					<!-- #temporals.format : ()안의 내용을 형식을 바꿔서 출력해라 -->

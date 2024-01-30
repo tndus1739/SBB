@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mysite.sbb.question.Question;
 import com.mysite.sbb.question.QuestionRepository;
+import com.mysite.sbb.user.SiteUser;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +22,9 @@ public class AnswerService {
 	// Insert , update , delete는 리턴타입이 없다. : void 선언
 	// select는 리턴타입이 있다. : List<Answer> , Answer등을 리턴으로 돌려준다.
 	
-	public void creatAnswer ( Integer id , String content) {
+	// 질문 등록 : question_id, content, author  
+	
+	public void creatAnswer ( Integer id , String content , SiteUser author) {
 		
 		Answer answer = new Answer();
 		answer.setContent(content);
@@ -38,6 +41,11 @@ public class AnswerService {
 		}
 		
 		answer.setQuestion(question);
+		
+		// 추가된 항목 : 사용자 정보 컬럼을 추가함 
+				answer.setAuthor(author);
+		
+		
 		answerRepository.save(answer);
 	
 	}

@@ -1,6 +1,9 @@
 package com.mysite.sbb.answer;
 
+import java.security.Principal;
+
 import org.hibernate.query.sqm.tree.select.SqmQuerySpec;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mysite.sbb.question.Question;
 import com.mysite.sbb.question.QuestionService;
+import com.mysite.sbb.user.SiteUser;
+import com.mysite.sbb.user.UserService;
 
 import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
@@ -25,15 +30,22 @@ public class AnswerController {
 
 	private final AnswerService answerService;
 	private final QuestionService questionService;
+	private final UserService userService;
 	
 	// 답변 등록 처리
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/answer/create/{id}")
 	public String createAnswer (
 			Model model , 
 			@PathVariable ("id") Integer id ,
 //			@RequestParam(value="content") String content
-			@Valid  AnswerForm answerForm , BindingResult bindingResult
+			@Valid  AnswerForm answerForm , BindingResult bindingResult,
+			Principal principal
 			) {
+		
+		//뷰에서 인증된 사용자 정보를 가지고 오는 객체
+		// 인증된 계정 정보가 출력 
+	    //System.out.println("뷰에서 인증된 계정 정보를 출력 : " + principal.getName());
 		
 		Question question = questionService.getQuestion(id);
 		
@@ -48,7 +60,14 @@ public class AnswerController {
 		System.out.println("question id : " + id);
 		System.out.println("content : " + answerForm.getContent());
 		
-		answerService.creatAnswer(id, answerForm.getContent());
+		// principal.getName() : 현재로그인 한 사용자 정보가 넘어옴. 
+		// 수정 추가됨 
+		SiteUser siteUser = userService.getUser( principal.getName() ) ; 
+				
+		// 수정됨 
+		
+		
+		answerService.creatAnswer(id, answerForm.getContent(), siteUser);
 		
 		return String.format("redirect:/question/detail/%s", id);  // id값이 %s에 주입
 	}

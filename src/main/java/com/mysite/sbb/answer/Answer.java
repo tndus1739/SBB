@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.mysite.sbb.question.Question;
+import com.mysite.sbb.user.SiteUser;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,5 +42,11 @@ public class Answer {
 	 @ManyToOne  // Answer 테이블 : many / Question 테이블 : one
 	 
 	 private Question question;  // 중요★★★★★	 
+	 
+	// 글쓴 사용자 정보 컬럼 추가함. 
+	// FK : author_id
+	// SiteUser : 부모 , Question : 자식 
+	@ManyToOne
+	private SiteUser author;
 	
 }

@@ -4,7 +4,21 @@
 
 
     <h5 class="my-3 border-bottom pb-2">질문등록</h5>
-    <form th:action="@{/question/create}" method="post" th:object="${questionForm}">
+    
+    <!-- ★quesion form은 2가지로 사용됨 [질문등록 , 질문수정
+    원래구문 : <form th:action="@{/question/create}" method="post" th:object="${questionForm}"> 
+    
+    [ th:action 을 생략하는 이유 : 생략을 안하면 수정 , 등록 중 1개만 됨]    
+    th:action 을 생략하면 URL 주소로 action값이 들어감
+    form의 method = "post" 설정이 있으므로 post 방식으로 넘어감
+    	-csrf 값이 할당되지 않음 , 명시적으로 csrf 설정을 해주어야 함
+    
+     -->
+     
+    
+    <form  method="post" th:object="${questionForm}">
+    	<input type="hidden" th:name="${_csrf.parameterName}"
+    		th:value="${_csrf.token}">
     
     	<!--평소에는 작동이 안되다가 true면 이 블럭이 작동 (true : error를 가지고 있을 때) -->
 	   	<!--  

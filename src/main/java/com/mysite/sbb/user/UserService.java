@@ -1,5 +1,8 @@
 package com.mysite.sbb.user;
 
+import java.util.Optional;
+
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -38,9 +41,37 @@ public class UserService {
 		userRepository.save(user);
 		
 		
-		
-		
 		return user;
 	}
 
+	// 사용자 정보를 받어서 DB에서 해당 객체를 리턴 메소드 
+		public SiteUser getUser(String username) {
+			// 사용자 정보를 매개변수로 받아서 DB에서 username 필드를 검색해서 리턴 
+			Optional<SiteUser> _siteUser = 
+					userRepository.findByUsername(username);
+			
+			if (_siteUser.isPresent() ) {
+				// DB에서 검색된 경우 : Optional<SiteUser> 객체가 저장 
+				return _siteUser.get(); 
+			}else {
+				// 넘어오는 username의 값이 username 필드에 존재하지 않는 경우 
+				// 강제로 예외를 발생 : throw :예외를 강제로 발생 시킴, 
+								   // throws : 예외를 호출하는곳에서 처리하도록 미룰때 사용 
+				throw new UsernameNotFoundException("사용자 정보를 찾을 수 없습니다. ") ; 
+				//return null; 
+			}
+			
+
+		}
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
