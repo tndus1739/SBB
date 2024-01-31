@@ -19,4 +19,7 @@ public interface UserRepository extends JpaRepository<SiteUser, Long>{
 		// select * from Site_User where username = ? ;
 	Optional <SiteUser> findByUsername(String username);
 	
+	// 값이 중복되지 않을 때만 optional 에 담고 값이 여러개면 list에 담는다. 
+	// optional은 값을 1개만 담을 수 있다. 
+	
 }

@@ -63,8 +63,18 @@ public class AnswerService {
 			
 		}
 	
+		// answer의 ID를 input 받아서 answer 객체를 리턴
+		public Answer getAnswer (Integer id) {
+			Optional<Answer> op =
+					answerRepository.findById(id);
+			return op.get();
+		}
 	
 	
+		// 메소드를 만들어 놓음
+		
+		// service를 두는 이유는 모듈화시켜서 controller의 코드를 깔끔하게 해줌 
+		// (service 없으면 반복코드 계속 사용) 
 	
 	
 	

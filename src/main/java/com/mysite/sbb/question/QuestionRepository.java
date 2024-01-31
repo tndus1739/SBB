@@ -82,8 +82,9 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {  
 		// 페이징 처리 : Page <Question> findAll(Pageable pagdable)
 		// Page : 페이징을 처리하깅 위한 클래스
 		// Pageable :페이징 처리하는 인터페이스
-		Page<Question> findAll(Pageable pageable);
+		Page<Question> findAll(Pageable pageable);  // 전체 페이지 중에 원하는 페이지만 게더링
 		
+		// page ---  전체 레코드 , 한페이지에 출력되는 레코드개수 , 정렬방식 ( 생략가능)
 		
 		
 		

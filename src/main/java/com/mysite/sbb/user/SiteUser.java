@@ -19,7 +19,7 @@ public class SiteUser {
 	
 	private Long id ;
 	
-	@Column (unique = true)
+	@Column (unique = true) // (unique = true) : 중복된 값을 넣을 수 가 없다. 
 	private String username ;
 	
 	private String password ;
