@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.mysite.sbb.DataNotFoundException;
 import com.mysite.sbb.question.Question;
 import com.mysite.sbb.question.QuestionRepository;
 import com.mysite.sbb.user.SiteUser;
@@ -67,16 +68,30 @@ public class AnswerService {
 		public Answer getAnswer (Integer id) {
 			Optional<Answer> op =
 					answerRepository.findById(id);
-			return op.get();
+			
+			
+			// op가 null이 아닐때  끄집어 낸다. (null일때 끄집어내면 오류발생)
+			if (op.isPresent()) {       // null 아닐 때
+				return op.get();
+				
+			}else {						// null 일 때
+				// 예외를 강제로 발생시킴
+				throw new DataNotFoundException("해당 내용은 Answer에 존재하지 않습니다");
+			}
+			
 		}
-	
-	
+
 		// 메소드를 만들어 놓음
 		
 		// service를 두는 이유는 모듈화시켜서 controller의 코드를 깔끔하게 해줌 
 		// (service 없으면 반복코드 계속 사용) 
 	
-	
+		
+		// 삭제 
+		public void delete (Answer answer) {
+			// 삭제
+			answerRepository.delete(answer);
+		}
 	
 	
 }

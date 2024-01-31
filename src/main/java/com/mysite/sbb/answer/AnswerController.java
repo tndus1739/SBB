@@ -83,7 +83,7 @@ public class AnswerController {
 	
 		//  답변을 수정할 수 있는 뷰 페이지 전송 
 	
-		@PreAuthorize("isAuthenticated()")
+		@PreAuthorize("isAuthenticated()")  
 		@GetMapping("/answer/modify/{id}")
 		
 		public String answerModify(
@@ -94,7 +94,7 @@ public class AnswerController {
 				) {
 			
 			// id값에 해당하는 answer 객체를 찾아온다. 
-			Answer answer = answerService.getAnswer(id);
+			Answer answer = answerService.getAnswer(id);   // answer의 id
 			
 			// 현재 로그온한 사용자가 자신이 작성한 답변이 아닌경우 예외 (오류를 강제로 발생)
 			// 자신이 작성한 글이 아닐 경유 :  강제 오류 발생
@@ -133,5 +133,31 @@ public class AnswerController {
 			return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
 		}
 	
-	
+		// answer 삭제
+		@GetMapping("/answer/delete/{id}")
+		public String answerDelete (
+				@PathVariable("id") Integer id,
+				Principal principal        // Principal : 현재 로그온한 계정을 가져온다.
+				) {
+			
+			// id로 Answer객체를 반환
+		Answer answer = answerService.getAnswer(id);
+		
+		// 현재 로그온한 계정이 DB에 저장된 계정과 동일할 경우 삭제
+		
+		if( ! principal.getName().equals(answer.getAuthor().getUsername())) {
+			
+			// 강제로 오류 발생 : 예외 처리
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"잘못된 요청입니다.");
+			
+		}
+		
+		
+		
+			// 삭제
+		
+			answerService.delete(answer);
+		
+			return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
+		}
 }

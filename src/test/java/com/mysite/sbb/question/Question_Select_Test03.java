@@ -3,6 +3,7 @@ package com.mysite.sbb.question;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,10 +44,32 @@ public class Question_Select_Test03 {
 		System.out.println("현재 요청 페이지 번호 :" + pages.getNumber());
 		System.out.println("이전 페이지 존재 여부 :" + pages.hasPrevious());
 		System.out.println("다음 페이지 존재여부 : " + pages.hasNext());
-
+		System.out.println("===========================================");
 		
+		// Page는 방번호가 없음 : 향상된 FOR , Iterator를 사용해서 출력
 		
+		System.out.println("========= 향상된 for문으로 출력 =========");
+		for (Question q : pages) {
+			System.out.println(q.getId());
+			System.out.println(q.getSubject());
+			System.out.println(q.getContent());
+			
+			
+		}
 		
+		System.out.println("===============   Iterator로 출력 ===============");
+		
+		// Iterator 선언 (장착)
+		Iterator<Question> iterator = pages.iterator();
+		while (iterator.hasNext()) {
+			
+			Question q = iterator.next();
+			
+			System.out.println(q.getId());
+			System.out.println(q.getSubject());
+			System.out.println(q.getContent());
+			
+		}
 		
 		
 		
