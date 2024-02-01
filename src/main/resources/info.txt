@@ -180,4 +180,40 @@
     - 모든 페이지는 인증을 통해서 접근
     - H2 Console 접근이 차단됨
     Spring Security 설정 파일에서 모듈 설정
+    
+    ================================================================================================
+    
+    MVC(Model , View , Controller) Model 
+      - 협업시 다른 개발자의 코드를 쉽게 이해 가능
+      - 유지 보수를 쉽게 할 수 있다. 
+      - Model : 비즈니스 로직을 처리 (메소드) , Service Layer
+      	-Repository (DAO) : DB의 작업을 처리 
+      - View : 화면에 출력 : Thymeleaf , JSP , React, ...
+      - Controller : 1. Client 요청 , 2. Service에 메소드 호출, 결과값을 리턴 -> 비즈니스 로직 처리
+      				 3. View 페이지를 전송
+      				 
+      client --> questionForm(DTO) --> Controller --> service --> Repository --> Entity
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	

@@ -25,7 +25,7 @@ public class AnswerService {
 	
 	// 질문 등록 : question_id, content, author  
 	
-	public void creatAnswer ( Integer id , String content , SiteUser author) {
+	public Answer creatAnswer ( Integer id , String content , SiteUser author) {  // Answer 객체를 return으로 돌려줌
 		
 		Answer answer = new Answer();
 		answer.setContent(content);
@@ -49,6 +49,7 @@ public class AnswerService {
 		
 		answerRepository.save(answer);
 	
+		return answer;   // Answer 객체를 return으로 돌려줌
 	}
 	
 	
@@ -92,6 +93,16 @@ public class AnswerService {
 			// 삭제
 			answerRepository.delete(answer);
 		}
-	
+		
+		
+		// 추천을 DB에 저장하는 로직
+		
+		public void vote(Answer answer , SiteUser siteUser) {
+			
+			//answer
+			answer.getVoter().add(siteUser);
+			
+			answerRepository.save(answer);
+		}
 	
 }

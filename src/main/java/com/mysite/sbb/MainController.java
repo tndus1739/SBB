@@ -13,4 +13,15 @@ public class MainController {
 		return "redirect:/question/list"; // 새로운 요청으로 다시 보내줌
 	}
 	
+	
+	
+	@GetMapping("/anchor")
+	public String anchor () {
+		
+		return "test_anchor";
+	}
+	
+	
+	
+	
 }

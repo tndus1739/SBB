@@ -36,6 +36,7 @@ public class AnswerController {
 	private final UserService userService;
 	
 	// 답변 등록 처리
+	// 앵커 태그를 사용해서 등록 이후  그 위치로 이동 <-- 수정됨 (240201)
 	@PreAuthorize("isAuthenticated()")  // 인증된 상태에서만 가져오기
 	@PostMapping("/answer/create/{id}")
 	public String createAnswer (
@@ -69,10 +70,13 @@ public class AnswerController {
 				
 		// 수정됨 
 		
+		Answer answer =
+					answerService.creatAnswer(id, answerForm.getContent(), siteUser);
 		
-		answerService.creatAnswer(id, answerForm.getContent(), siteUser);
+		  // id값이 %s에 주입
+		return String.format("redirect:/question/detail/%s#answer_%s", 
+			    answer.getQuestion().getId(), answer.getId()); // id값이  각 각의 %s에 주입
 		
-		return String.format("redirect:/question/detail/%s", id);  // id값이 %s에 주입
 	}
 		
 		/*
@@ -81,10 +85,11 @@ public class AnswerController {
 		 
 		  */
 	
-		//  답변을 수정할 수 있는 뷰 페이지 전송 
+		//  답변을 수정할 수 있는 뷰 페이지 전송
+		
 	
 		@PreAuthorize("isAuthenticated()")  
-		@GetMapping("/answer/modify/{id}")
+		@GetMapping("/answer/modify/{id}")   // getmapping은 그냥 뷰페이지 보여주는 것
 		
 		public String answerModify(
 				AnswerForm answerForm,  // 빈껍데기
@@ -114,7 +119,7 @@ public class AnswerController {
 	
 		// 수정 폼에서 넘어오는 값을 받아서 저장
 		
-		
+		// 앵커를 이용해서 수정이후 해당 위치로 이동
 		@PreAuthorize("isAuthenticated()")
 		@PostMapping("/answer/modify/{id}")
 		public String answerModify (
@@ -130,7 +135,8 @@ public class AnswerController {
 			answerService.modify(answer, answerForm.getContent());
 			
 			// 수정 완료 후 이동 페이지 
-			return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
+			return String.format("redirect:/question/detail/%s#answer_%s", 
+				    answer.getQuestion().getId(), answer.getId());
 		}
 	
 		// answer 삭제
@@ -160,4 +166,30 @@ public class AnswerController {
 		
 			return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
 		}
+		
+		
+		// 답변 추천 기능 처리
+		
+		@PreAuthorize("isAuthenticated()") // 로그인 되었을 때 접근 가능 , 인증이 안된 경우 인증 페이지로 던짐
+		@GetMapping("/answer/vote/{id}")
+		public String answerVote(
+				@PathVariable("id") Integer id,   // answer에 대한 아이디
+				Principal principal
+				) {
+			
+		// id를 가지고 answer객체를 끄집어 내어와야함
+		Answer answer = answerService.getAnswer(id);
+		
+		// principal 를 가지고 SiteUser 객체를 끄집어내야 함
+		SiteUser siteUser = userService.getUser(principal.getName());
+		
+		// DB에 저장
+		answerService.vote(answer, siteUser);
+		
+			
+		// 투표 후 질문 상세페이지로 이동됨	
+		return String.format("redirect:/question/detail/%s#answer_%s", 
+			    answer.getQuestion().getId(), answer.getId());
+		}														// answer에 대한 question객체를 끄집어내어와서 id값을 가져온다. 
+		
 }
