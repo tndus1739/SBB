@@ -26,7 +26,8 @@ import com.mysite.sbb.user.UserService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @RequestMapping("/question")  // 하의 @GetMapping , @PostMapping의 prefix가 적용됨
 @RequiredArgsConstructor // 보안이나 여러 문제들을 해결
 @Controller
@@ -42,13 +43,22 @@ public class QuestionController {
 	
 	// 글목록 조회
 	
-	//http://localhost:8585/question/list
+	//http://localhost:8585/question/list?page=0&kw='스프링'
 	@GetMapping("/list") // "/question/list"로 요청이 들어오면
 	//@ResponseBody  
 	// @ResponseBody :문자열 자체를 return으로 돌려줌 /  @ResponseBody가 생략이 되면 뷰페이지를 보여줌
 	public String list(Model model,
-			@RequestParam(value = "page" , defaultValue="0") int page
-			) {
+			@RequestParam(value = "page" , defaultValue="0") Integer page,
+			@RequestParam (value ="kw", defaultValue="") String kw    // 검색어가 공백이면 모든 레코드값이 출력
+			) {									// null 이 아니고 빈값을 넣겠다라는 뜻
+		
+		
+		// 로그에서 출력 : 서버에 배포된 상태에서 변수 값을 출력
+		log.info("page:{} , kw:{}" , page , kw);
+		
+		// 콘솔에서 출력 : 개발시에 변수값이 잘 들어오는지 출력
+		System.out.println("page :" + page);
+		System.out.println("kw :" + kw);
 		
 		// Model : 서버의 데이터를 client view 페이지로 전송
 		// 메소드 인풋값으로 선언되면 객체가 자동으로 생성됨
@@ -57,7 +67,7 @@ public class QuestionController {
 		//List<Question> questionList = questionService.getList();
 		
 		// 페이징 처리된 객체를 받음
-		Page<Question> paging = questionService.getList(page);
+		Page<Question> paging = questionService.getList(page , kw);
 		
 		// paging에 등록되어 있는 중요 메소드 출력
 		System.out.println("전체 레코드 수 :" + paging.getTotalElements());
@@ -74,6 +84,7 @@ public class QuestionController {
 		                  //client에게서 가져올 변수 //객체:list안에 question 객체가 담겨있음
 		
 		model.addAttribute("paging",paging);
+		model.addAttribute("kw",kw);
 		
 		//templates/question_list.html
 		// thymeleaf 라이브러리  설치시 view page가 위치할 곳 ( .html)

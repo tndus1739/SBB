@@ -57,7 +57,7 @@ public class QuestionService {
 	}
 	
 	// client에서 요청할 페이지 번호를 매개변수로 입력 : 
-	public Page<Question> getList(int page) {
+	public Page<Question> getList(Integer page , String kw) {
 	  
 		// page : 요청하는 페이지 번호 , 10 : 한페이지에 출력하는 레코드 개수
 		// Sort : 페이지를 정렬해주는 객체
@@ -67,7 +67,8 @@ public class QuestionService {
 		
 		Pageable pageable = PageRequest.of(page, 10 ,Sort.by(sorts));
 	  
-		return questionRepository.findAll(pageable);
+		// return questionRepository.findAll(pageable);
+		return questionRepository.findAllByKeyword(kw, pageable); 
 	  
   }
 	

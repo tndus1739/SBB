@@ -195,25 +195,144 @@
       client --> questionForm(DTO) --> Controller --> service --> Repository --> Entity
       
     
+    ================================================================================================
+    
+    - 검색기능 구현 : 검색어 '스프링'
+    	question :
+    		 -subject 컬럼에서 검색
+    		 -content 컬럼에서 검색
+    		 
+        answer : 
+        	- content 컬럼에서 검색
+        site_user
+        	-username 컬럼에서 검색	
+     
+   [JPQL : 객체 타입의 쿼리 --> 모든 DBMS 에 공통으로 작동되는 쿼리] 
+   
+        	
+   1. question 테이블의 subject/content 컬럼을 기준으로 검색 쿼리	 
+    
+	select * from question where subject like '%s%';    
+	select * from question where content like '%s%';    
+    
+   2. answer 테이블의 content 컬럼을 기준으로 검색 쿼리 
+    select * from answer where content like '%s%';  
+    
+   3. site_user 테이블의 user_name 컬럼에서 검색
+    
+    select * from site_user where username like '%s%';
     
     
+  실제 SQL 쿼리 ===> JPQL : 객체 타입의 쿼리 <== 모든 DBMS에 공통으로 작동되는 쿼리 
+ 
+ ===========DB에 쿼리 =====================================================
+ select  distinct q.id , q.subject, q.content, u1.username , a.content, 
+            q.author_id , q.create_date, q.modify_date
+from question q
+   left outer join site_user u1 
+        on q.author_id = u1.id 
+   left outer join answer a 
+         on q.id = a.question_id 
+    left outer join site_user u2 
+         on a.author_id = u2.id 
+    
+where 
+      q.subject like '%스프링%' 
+      or u1.username like '%스프링%' 
+      or a.content like '%스프링%'
+      or u2.username like '%스프링%' 
+      
+ ========================================================================
+ 	 
+   
+ 배포 : 
+ 	-war : JSP , 외장 톰캣  				      <-- 서버 : JDK 17, 톰캣 : 10.1
+ 	-jar : Spring Boot , 톰캣을 내장 배포        <-- 서버 : JDK 17
+ 	
+ 	- 도커 환경에 배포 :						<-- 서버 : 도커만 설치
+ 		- 도커 이미지 : JDK27 + 톰켓:10.1 + 개발소스
+ 
+ Jar 배포 파일 만들기
+ 
+  menu--> run --> run configuration --> 
+ 
+  배포 파일 위치 : WorkSpace\sbb\build\libs\0.0.1-SNAPSHOT.jar
+  배포 파일 이름 : sbb-0.0.1-SNAPSHOT.jar	
+  
+  서버 : jdk17 설치 후 
+  
+   	java -jar sbb-0.0.1-SNAPSHOT.jar				<--- TCP  8686
+   	방화벽 : AWS 방화벽 , Windows 방화벽(wf.msc)
+ 	
+ 	== 관리자 권한으로 명령프롬프트가 실행되어야 함 [80번포트로 실행하려면]==
+ 	
+ 	- Forground Mode 실행
+ 	java -jar -Dserver.port=80 sbb-0.0.1-SNAPSHOT.jar
+ 
+ 	- Background Mode 실행
+ 	java -jar -Dserver.port=80 sbb-0.0.1-SNAPSHOT.jar &
+ 	
+ 	
+ 	AWS Linux VM에 Spring Boot 배포
+ 	 - 컴퓨터 이름 바꾸기 : hostname  --> 리부팅 필요
+ 	 
+ 	   sudo hostnamectl set-hostname Ubuntu-vm
+ 	 
+ 	   sudo reboot
+ 	 
+ 	 - 날짜 / 타임존 변경 : UTC 시간대로 로그가 남음
+
+	   date : 현재 시스템에 셋팅된 날짜 / 시간 / 시간대 UTC 	
+ 	
+ 	   sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+ 	
+ 	- JDK 17설치
+ 		java -version
+ 		sudo apt update
+ 	
+ 		sudo apt install openjdk-17-jre-headless 
+ 		java-version
+ 		
+ 	- 프로젝트 실행 :  localhost:8686
+ 	java -jar sbb-0.0.1-SNAPSHOT.jar	
+ 		
+ 	- AWS의 Ubuntu VM은 기본적으로 방화벽이 비활성화 되어있음
+ 	 	- AWS의 방화벽만 열어주면 됨
+ 	      TCP 8686 포트 오픈
+ 	- Ubuntu-VM의 공인 IP로 접속
+ 	     http://공인 IP:8686
+ 
+ 
+ 
+ -- 80번 포트에서 서비스 작동 시키기 [백그라운드 모드로 실행]
+ 
+ 	sudo java -Dserver.port=80 -jar sbb-0.0.1-SNAPSHOT.jar &
+ 	
+ 	// H2 DB의 DataBase 파일의 위치 : ubuntu
+ 	
+ 	자신의 계정의 홈 폴더에 DB파일이 위치
+ 	/home/ubuntu	
+ 		local2.my.db
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
+  
