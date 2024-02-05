@@ -1,0 +1,29 @@
+2024-02-02 18:22:56.135  INFO 16940 --- [restartedMain] com.mysite.sbb.SbbApplication            : Starting SbbApplication using Java 17.0.9 with PID 16940 (C:\WorkSpace_STS4\sbb\bin\main started by hi in C:\WorkSpace_STS4\sbb)
+2024-02-02 18:22:56.135  INFO 16940 --- [restartedMain] com.mysite.sbb.SbbApplication            : No active profile set, falling back to 1 default profile: "default"
+2024-02-02 18:22:56.244  INFO 16940 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-02 18:22:56.251  INFO 16940 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 3 JPA repository interfaces.
+2024-02-02 18:22:56.327  INFO 16940 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8585 (http)
+2024-02-02 18:22:56.328  INFO 16940 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-02 18:22:56.328  INFO 16940 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2024-02-02 18:22:56.344  INFO 16940 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2024-02-02 18:22:56.344  INFO 16940 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 207 ms
+2024-02-02 18:22:56.354  INFO 16940 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Starting...
+2024-02-02 18:22:56.361  INFO 16940 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-8 - Added connection conn62: url=jdbc:h2:~/local200 user=SA
+2024-02-02 18:22:56.361  INFO 16940 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Start completed.
+2024-02-02 18:22:56.361  INFO 16940 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local200'
+2024-02-02 18:22:56.383  INFO 16940 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-02 18:22:56.385  INFO 16940 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-02-02 18:22:56.388  INFO 16940 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-02 18:22:56.389  WARN 16940 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-02-02 18:22:56.420  INFO 16940 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-02 18:22:56.422  INFO 16940 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-02 18:22:56.529  WARN 16940 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-02-02 18:22:56.597  INFO 16940 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@56da7f2c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7ef3553b, org.springframework.security.web.context.SecurityContextHolderFilter@534d0f64, org.springframework.security.web.header.HeaderWriterFilter@4bae3f4a, org.springframework.web.filter.CorsFilter@c97d3f4, org.springframework.security.web.csrf.CsrfFilter@112d7ee5, org.springframework.security.web.authentication.logout.LogoutFilter@1b2b035f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@15a8a73d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@29ed89be, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1ac8366c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5cd60c14, org.springframework.security.web.access.ExceptionTranslationFilter@323034c3, org.springframework.security.web.access.intercept.AuthorizationFilter@56eff1e]
+2024-02-02 18:22:56.662  INFO 16940 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-02-02 18:22:56.672  INFO 16940 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8585 (http) with context path ''
+2024-02-02 18:22:56.675  INFO 16940 --- [restartedMain] com.mysite.sbb.SbbApplication            : Started SbbApplication in 0.567 seconds (process running for 4029.654)
+2024-02-02 18:22:56.676  INFO 16940 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-02-02 18:22:59.727  INFO 16940 --- [RMI TCP Connection(102)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2024-02-02 18:22:59.735  INFO 16940 --- [RMI TCP Connection(102)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-02-02 18:22:59.736  INFO 16940 --- [RMI TCP Connection(102)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown initiated...
+2024-02-02 18:22:59.939  INFO 16940 --- [RMI TCP Connection(102)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown completed.

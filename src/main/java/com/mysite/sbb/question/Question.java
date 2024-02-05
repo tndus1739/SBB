@@ -10,6 +10,7 @@ import com.mysite.sbb.user.SiteUser;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -51,13 +52,13 @@ public class Question {
 	// 하나의 질문에 대해서 모든 답변을 가져올 수 있다
 	
 	// cascade=CascadeType.REMOVE : 질문이 제거될 때 질문에 해당하는 모든 답변을 함께 제거함
-	@OneToMany(mappedBy = "question" , cascade=CascadeType.REMOVE) 
+	@OneToMany(fetch = FetchType.LAZY , mappedBy = "question" , cascade=CascadeType.REMOVE) 
 	private List<Answer> answerList; 
 
 	// 글쓴 사용자 정보 컬럼 추가함. 
 	// FK : author_id
 	// SiteUser : 부모 , Question : 자식 
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY)
 	private SiteUser author; 
 
 	// 글 추천 컬럼 추가 : @ManyToMany <== ( 컬럼이 만들어지는게 아니라 새로운 테이블이 생성됨) 
@@ -72,7 +73,7 @@ public class Question {
 	// QUESTION_VOTER 라는 별도의 테이블이 생성
 	
 	
-	@ManyToMany
+	@ManyToMany (fetch = FetchType.LAZY)
 	private Set<SiteUser> voter;
 	
 	

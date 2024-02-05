@@ -9,6 +9,7 @@ import com.mysite.sbb.user.SiteUser;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -42,14 +43,14 @@ public class Answer {
 	 
 	 
 	 //★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-	 @ManyToOne  // Answer 테이블 : many / Question 테이블 : one
+	 @ManyToOne (fetch = FetchType.LAZY)  // Answer 테이블 : many / Question 테이블 : one
 	 
 	 private Question question;  // 중요★★★★★	 
 	 
 	// 글쓴 사용자 정보 컬럼 추가함. 
 	// FK : author_id
 	// SiteUser : 부모 , Question : 자식 
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY)
 	private SiteUser author;
 	
 	// 별도의 테이블이 생성됨  : answer_voter 테이블이 생성됨
@@ -57,6 +58,6 @@ public class Answer {
 		// answer_id : answer테이블의 id를 참조
 		// voter_id : site_user테이블의 id를 참조함
 		// 
-	@ManyToMany
+	@ManyToMany (fetch = FetchType.LAZY)
 	private Set<SiteUser> voter;
 }
