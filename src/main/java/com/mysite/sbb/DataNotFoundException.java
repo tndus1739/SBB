@@ -15,7 +15,7 @@ public class DataNotFoundException extends RuntimeException{
 
 		//생성자 에 오류 메세지를 받아서 
 			public DataNotFoundException(String message) {
-				super(message); 
+				super(message);  
 }
 	
 	
